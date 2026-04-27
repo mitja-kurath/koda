@@ -1,0 +1,26 @@
+{
+  "name": "koda",
+  "version": "1.0.0",
+  "description": "Koda - API Documentation Platform",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm run --parallel /^dev:.*/",
+    "dev:web": "pnpm --filter web dev",
+    "dev:api": "pnpm --filter api dev",
+    "build": "pnpm run /^build:.*/",
+    "build:web": "pnpm --filter web build",
+    "build:api": "pnpm --filter api build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "install:all": "pnpm install && pnpm --filter api build"
+  },
+  "keywords": [
+    "openapi",
+    "documentation",
+    "angular",
+    "spring-boot"
+  ],
+  "author": "Mitja Kurath",
+  "license": "ISC",
+  "packageManager": "pnpm@10.30.0"
+}

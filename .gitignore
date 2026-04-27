@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Environment & secrets — never commit these
+.env
+.env.*
+!.env.example
+*.local
+
+# Docker overrides that may contain real credentials
+docker-compose.override.yml
+docker-compose.override.yaml
+
+# Build output
+dist/
+build/
+
+# Logs
+*.log
+pnpm-debug.log*
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
