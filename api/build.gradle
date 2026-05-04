@@ -34,8 +34,6 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.13.0'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.13.0'
 
-    implementation 'io.swagger.parser.v3:swagger-parser:2.1.40'
-
     implementation 'org.commonmark:commonmark:0.28.0'
 
     compileOnly 'org.projectlombok:lombok'
@@ -45,10 +43,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
-
-tasks.named('test') {
-    useJUnitPlatform()
 }
 
 bootJar {

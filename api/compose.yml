@@ -10,7 +10,7 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U koda"]
+      test: [ "CMD-SHELL", "pg_isready -U koda" ]
       interval: 5s
       timeout: 5s
       retries: 10
