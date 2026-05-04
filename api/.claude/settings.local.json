@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./gradlew compileJava)",
+      "Bash(Start-Process -NoNewWindow -FilePath \".\\\\gradlew\" -ArgumentList \"bootRun\" -RedirectStandardOutput \"C:\\\\Temp\\\\koda-boot.log\" -RedirectStandardError \"C:\\\\Temp\\\\koda-boot-err.log\")",
+      "Bash(Start-Sleep -Seconds 25)",
+      "Bash(Get-Content \"C:\\\\Temp\\\\koda-boot.log\" -Tail 40)",
+      "Bash(./gradlew bootRun)",
+      "Bash(echo \"PID: $!\")",
+      "Read(//tmp/**)"
+    ]
+  }
+}
