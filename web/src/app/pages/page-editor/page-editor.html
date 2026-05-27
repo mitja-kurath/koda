@@ -1,0 +1,66 @@
+<div class="min-h-screen bg-background text-foreground">
+
+  <header class="flex items-center justify-between px-10 py-6 border-b">
+    <span class="text-xl font-bold tracking-tighter">KODA</span>
+    <a [routerLink]="['/project', projectSlug]">
+      <button hlmBtn variant="ghost" size="sm">← Back to project</button>
+    </a>
+  </header>
+
+  @if (loading()) {
+    <div class="flex items-center justify-center h-64">
+      <div class="animate-spin h-8 w-8 rounded-full border-2 border-primary border-t-transparent"></div>
+    </div>
+  } @else {
+    <main class="max-w-5xl mx-auto px-6 py-8">
+
+      <h1 hlmH1 class="mb-6">{{ isNew() ? 'New page' : 'Edit page' }}</h1>
+
+      <form [formGroup]="form" (ngSubmit)="save()" class="space-y-5">
+        <div class="space-y-1.5">
+          <label hlmLabel for="p-title">Title *</label>
+          <input hlmInput id="p-title" type="text" placeholder="Getting Started"
+                 formControlName="title" class="w-full" />
+        </div>
+
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between">
+            <label hlmLabel for="p-content">Content (Markdown) *</label>
+            <button type="button" hlmBtn variant="ghost" size="sm"
+                    (click)="showPreview.set(!showPreview())">
+              {{ showPreview() ? 'Hide preview' : 'Show preview' }}
+            </button>
+          </div>
+          <div [class]="showPreview() ? 'grid grid-cols-2 gap-4' : ''">
+            <textarea hlmTextarea id="p-content" formControlName="content"
+                      rows="20" class="w-full font-mono text-sm"
+                      placeholder="# Getting Started&#10;&#10;Welcome to your API documentation..."></textarea>
+            @if (showPreview() && previewContent()) {
+              <div class="border rounded-md p-4 overflow-auto max-h-[480px]">
+                <app-markdown-view [content]="previewContent()" />
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="space-y-1.5 max-w-xs">
+          <label hlmLabel for="p-order">Sort order</label>
+          <input hlmInput id="p-order" type="number" formControlName="sortOrder" class="w-full" />
+        </div>
+
+        @if (errorMessage()) {
+          <p class="text-sm text-destructive">{{ errorMessage() }}</p>
+        }
+
+        <div class="flex gap-3">
+          <button hlmBtn type="submit" [disabled]="saving()">
+            {{ saving() ? 'Saving…' : (isNew() ? 'Create page' : 'Save changes') }}
+          </button>
+          <a [routerLink]="['/project', projectSlug]">
+            <button hlmBtn type="button" variant="outline">Cancel</button>
+          </a>
+        </div>
+      </form>
+    </main>
+  }
+</div>

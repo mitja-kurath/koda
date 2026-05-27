@@ -1,0 +1,56 @@
+<div class="min-h-screen flex items-center justify-center bg-background px-4">
+  <div class="w-full max-w-sm space-y-6">
+
+    <div class="text-center space-y-1">
+      <h1 hlmH2>Create an account</h1>
+      <p hlmMuted>Start documenting your APIs with Koda</p>
+    </div>
+
+    <section hlmCard class="p-6">
+      <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
+
+        <div class="space-y-1.5">
+          <label hlmLabel for="name">Name</label>
+          <input hlmInput id="name" type="text" placeholder="Jane Doe"
+                 formControlName="name" class="w-full" />
+          @if (fieldError('name')) {
+            <p class="text-xs text-destructive">{{ fieldError('name') }}</p>
+          }
+        </div>
+
+        <div class="space-y-1.5">
+          <label hlmLabel for="email">Email</label>
+          <input hlmInput id="email" type="email" placeholder="you@example.com"
+                 formControlName="email" class="w-full" />
+          @if (fieldError('email')) {
+            <p class="text-xs text-destructive">{{ fieldError('email') }}</p>
+          }
+        </div>
+
+        <div class="space-y-1.5">
+          <label hlmLabel for="password">Password</label>
+          <input hlmInput id="password" type="password" placeholder="Min. 8 characters"
+                 formControlName="password" class="w-full" />
+          @if (fieldError('password')) {
+            <p class="text-xs text-destructive">{{ fieldError('password') }}</p>
+          }
+        </div>
+
+        @if (errorMessage()) {
+          <p class="text-sm text-destructive">{{ errorMessage() }}</p>
+        }
+
+        <button hlmBtn type="submit" class="w-full" [disabled]="loading()">
+          {{ loading() ? 'Creating account…' : 'Create account' }}
+        </button>
+
+      </form>
+    </section>
+
+    <p class="text-center text-sm text-muted-foreground">
+      Already have an account?
+      <a routerLink="/login" class="text-primary underline underline-offset-4">Sign in</a>
+    </p>
+
+  </div>
+</div>

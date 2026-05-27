@@ -1,0 +1,41 @@
+<div class="min-h-screen flex items-center justify-center bg-background px-4">
+  <div class="w-full max-w-sm space-y-6">
+
+    <div class="text-center space-y-1">
+      <h1 hlmH2>Welcome back</h1>
+      <p hlmMuted>Sign in to your Koda account</p>
+    </div>
+
+    <section hlmCard class="p-6">
+      <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
+
+        <div class="space-y-1.5">
+          <label hlmLabel for="email">Email</label>
+          <input hlmInput id="email" type="email" placeholder="you@example.com"
+                 formControlName="email" class="w-full" />
+        </div>
+
+        <div class="space-y-1.5">
+          <label hlmLabel for="password">Password</label>
+          <input hlmInput id="password" type="password" placeholder="••••••••"
+                 formControlName="password" class="w-full" />
+        </div>
+
+        @if (errorMessage()) {
+          <p class="text-sm text-destructive">{{ errorMessage() }}</p>
+        }
+
+        <button hlmBtn type="submit" class="w-full" [disabled]="loading()">
+          {{ loading() ? 'Signing in…' : 'Sign in' }}
+        </button>
+
+      </form>
+    </section>
+
+    <p class="text-center text-sm text-muted-foreground">
+      No account yet?
+      <a routerLink="/register" class="text-primary underline underline-offset-4">Register</a>
+    </p>
+
+  </div>
+</div>

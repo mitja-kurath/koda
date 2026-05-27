@@ -1,0 +1,55 @@
+<div class="min-h-screen bg-background text-foreground">
+
+  <header class="flex items-center justify-between px-10 py-6 border-b">
+    <span class="text-xl font-bold tracking-tighter">KODA</span>
+    <a routerLink="/dashboard"><button hlmBtn variant="ghost" size="sm">← Dashboard</button></a>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-6 py-10 space-y-8">
+
+    @if (loading()) {
+      <div class="h-32 rounded-lg bg-muted animate-pulse"></div>
+    } @else if (team(); as t) {
+
+      <div>
+        <h1 hlmH1>{{ t.name }}</h1>
+        <p hlmMuted>Plan: {{ t.plan }}</p>
+      </div>
+
+      <!-- Invite form -->
+      <section hlmCard class="p-6 space-y-4">
+        <h2 hlmH3>Invite member</h2>
+        <p hlmMuted class="text-sm">The person must already have a Koda account.</p>
+        <form [formGroup]="inviteForm" (ngSubmit)="invite()" class="flex gap-3">
+          <input hlmInput type="email" placeholder="colleague@example.com"
+                 formControlName="email" class="flex-1" />
+          <button hlmBtn type="submit" [disabled]="inviting()">
+            {{ inviting() ? 'Inviting…' : 'Invite' }}
+          </button>
+        </form>
+        @if (inviteError()) { <p class="text-sm text-destructive">{{ inviteError() }}</p> }
+        @if (inviteSuccess()) { <p class="text-sm text-green-600">{{ inviteSuccess() }}</p> }
+      </section>
+
+      <!-- Members -->
+      <section hlmCard class="p-6 space-y-3">
+        <h2 hlmH3>Members ({{ t.members.length }})</h2>
+        @for (member of t.members; track member.userId) {
+          <div class="flex items-center justify-between py-2 border-b last:border-0">
+            <div>
+              <p class="font-medium text-sm">{{ member.name }}</p>
+              <p class="text-xs text-muted-foreground">{{ member.email }}</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-medium uppercase px-2 py-0.5 rounded bg-muted">{{ member.role }}</span>
+              @if (member.role !== 'OWNER') {
+                <button hlmBtn variant="destructive" size="sm" (click)="removeMember(member.userId)">Remove</button>
+              }
+            </div>
+          </div>
+        }
+      </section>
+
+    }
+  </main>
+</div>

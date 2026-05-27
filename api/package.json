@@ -4,7 +4,7 @@
   "description": "Koda API Service",
   "private": true,
   "scripts": {
-    "dev": "./gradlew bootRun",
+    "dev": "./gradlew bootRun --args='--spring.profiles.active=local'",
     "build": "./gradlew build",
     "test": "./gradlew test"
   }

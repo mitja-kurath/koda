@@ -1,0 +1,73 @@
+<div class="min-h-screen bg-background text-foreground">
+
+  <header class="flex items-center justify-between px-10 py-6 border-b">
+    <span class="text-xl font-bold tracking-tighter">KODA</span>
+    <a routerLink="/"><button hlmBtn variant="ghost" size="sm">← Back to Koda</button></a>
+  </header>
+
+  @if (notFound()) {
+    <div class="flex flex-col items-center justify-center h-64 space-y-3">
+      <h2 hlmH2>Project not found</h2>
+      <p hlmMuted>This project may be private or doesn't exist.</p>
+    </div>
+  } @else if (project(); as p) {
+
+    <main class="max-w-5xl mx-auto px-6 py-8 space-y-6">
+
+      <div>
+        <h1 hlmH1>{{ p.name }}</h1>
+        @if (p.description) { <p hlmMuted>{{ p.description }}</p> }
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex gap-1 border-b">
+        @if (p.hasSpec) {
+          <button class="px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors"
+                  [class]="activeTab() === 'spec' ? 'border-primary text-foreground' : 'border-transparent text-muted-foreground hover:text-foreground'"
+                  (click)="setTab('spec')">API Reference</button>
+        }
+        @if (pages().length > 0) {
+          <button class="px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors"
+                  [class]="activeTab() === 'guides' ? 'border-primary text-foreground' : 'border-transparent text-muted-foreground hover:text-foreground'"
+                  (click)="setTab('guides')">Guides</button>
+        }
+      </div>
+
+      <!-- Spec Tab -->
+      @if (activeTab() === 'spec') {
+        @if (spec(); as s) {
+          <app-spec-viewer [spec]="s" />
+        } @else {
+          <p hlmMuted>No API specification uploaded yet.</p>
+        }
+      }
+
+      <!-- Guides Tab -->
+      @if (activeTab() === 'guides') {
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <nav class="space-y-1">
+            @for (page of pages(); track page.id) {
+              <button class="w-full text-left px-3 py-2 rounded text-sm transition-colors"
+                      [class]="selectedPage()?.id === page.id ? 'bg-primary/10 text-primary font-medium' : 'hover:bg-muted'"
+                      (click)="selectPage(page)">
+                {{ page.title }}
+              </button>
+            }
+          </nav>
+          <div class="md:col-span-3">
+            @if (selectedPage(); as page) {
+              <app-markdown-view [content]="page.content" />
+            } @else if (pages().length > 0) {
+              <p hlmMuted>Select a page from the list.</p>
+            }
+          </div>
+        </div>
+      }
+
+    </main>
+  } @else {
+    <div class="flex items-center justify-center h-64">
+      <div class="animate-spin h-8 w-8 rounded-full border-2 border-primary border-t-transparent"></div>
+    </div>
+  }
+</div>

@@ -1,0 +1,49 @@
+<div class="min-h-screen bg-background text-foreground">
+  <header class="flex items-center justify-between px-10 py-6 border-b">
+    <span class="text-xl font-bold tracking-tighter">KODA</span>
+    <a routerLink="/dashboard"><button hlmBtn variant="ghost" size="sm">← Dashboard</button></a>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-6 py-10">
+    <div class="space-y-1 mb-8">
+      <h1 hlmH1>New Project</h1>
+      <p hlmMuted>Create a new API documentation project</p>
+    </div>
+
+    <section hlmCard class="p-6">
+      <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-5">
+
+        <div class="space-y-1.5">
+          <label hlmLabel for="name">Project name *</label>
+          <input hlmInput id="name" type="text" placeholder="My API" formControlName="name" class="w-full" />
+        </div>
+
+        <div class="space-y-1.5">
+          <label hlmLabel for="description">Description</label>
+          <textarea hlmTextarea id="description" placeholder="Describe your API…"
+                    formControlName="description" rows="3" class="w-full"></textarea>
+        </div>
+
+        <div class="space-y-1.5">
+          <label hlmLabel for="visibility">Visibility</label>
+          <select id="visibility" formControlName="visibility"
+                  class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]">
+            <option value="PRIVATE">Private — only your team</option>
+            <option value="PUBLIC">Public — anyone with the link</option>
+          </select>
+        </div>
+
+        @if (errorMessage()) {
+          <p class="text-sm text-destructive">{{ errorMessage() }}</p>
+        }
+
+        <div class="flex gap-3 pt-2">
+          <button hlmBtn type="submit" [disabled]="loading()">
+            {{ loading() ? 'Creating…' : 'Create project' }}
+          </button>
+          <a routerLink="/dashboard"><button hlmBtn type="button" variant="outline">Cancel</button></a>
+        </div>
+      </form>
+    </section>
+  </main>
+</div>
