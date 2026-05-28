@@ -28,6 +28,8 @@ services:
       DB_NAME: ${DB_NAME:-koda}
       DB_USER: ${DB_USER:-koda}
       DB_PASSWORD: ${DB_PASSWORD:-koda}
+      JWT_SECRET: ${JWT_SECRET}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
     depends_on:
       db:
         condition: service_healthy
