@@ -6,7 +6,7 @@ services:
       POSTGRES_USER: ${DB_USER:-koda}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-koda}
     ports:
-      - "${DB_PORT:-5432}:5432"
+      - "${DB_PORT:-9999}:9999"
     volumes:
       - pg_data:/var/lib/postgresql/data
     healthcheck:
