@@ -434,12 +434,14 @@ Wir haben mit Feature Branches und Pull Requests gearbeitet.
 
 ## 9. Quellen
 
-- OWASP Top 10 2025: https://owasp.org/Top10/
-- A01 Broken Access Control: https://owasp.org/Top10/A01_2021-Broken_Access_Control/
-- A02 Cryptographic Failures: https://owasp.org/Top10/A02_2021-Cryptographic_Failures/
-- A03 Software and Data Integrity: https://owasp.org/Top10/A03_2021-Injection/
-- A07 Authentication Failures: https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/
-- BCrypt Password Hashing: https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
-- JWT Best Practices: https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
-- Spring Security Reference: https://docs.spring.io/spring-security/reference/
-- JJWT Dokumentation: https://github.com/jwtk/jjwt
+* OWASP Top 10:2025: https://owasp.org/Top10/2025/
+* OWASP A01:2025 – Broken Access Control: https://owasp.org/Top10/2025/A01_2025-Broken_Access_Control/
+* OWASP A03:2025 – Software Supply Chain Failures: https://owasp.org/Top10/2025/A03_2025-Software_Supply_Chain_Failures/
+* OWASP A04:2025 – Cryptographic Failures: https://owasp.org/Top10/2025/A04_2025-Cryptographic_Failures/
+* OWASP A07:2025 – Authentication Failures: https://owasp.org/Top10/2025/A07_2025-Authentication_Failures/
+* OWASP Password Storage Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
+* OWASP JSON Web Token Cheat Sheet for Java: https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
+* Spring Security Reference: https://docs.spring.io/spring-security/reference/
+* Spring Security BCryptPasswordEncoder API: https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder.html
+* JJWT Dokumentation: https://github.com/jwtk/jjwt
+* Angular Security Guide: https://angular.dev/best-practices/security
