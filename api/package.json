@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "./gradlew bootRun --args='--spring.profiles.active=local'",
-    "build": "chmod +x ./gradlew && ./gradlew build",
+    "build": "chmod +x ./gradlew && ./gradlew bootJar --no-daemon -x test",
+    "start": "java -jar build/libs/api.jar",
     "test": "./gradlew test"
   }
 }
