@@ -10,4 +10,5 @@ FROM nginx:alpine
 COPY --from=build /app/dist/web/browser /usr/share/nginx/html
 # nginx:alpine processes *.template files in /etc/nginx/templates/ at startup via envsubst
 COPY nginx.conf /etc/nginx/templates/default.conf.template
+ENV PORT=80
 EXPOSE 80
