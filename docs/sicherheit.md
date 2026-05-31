@@ -22,6 +22,32 @@ Koda ist eine Web-App zur Verwaltung und Veröffentlichung von API-Dokumentation
 
 ---
 
+### Screenshots der laufenden Applikation
+
+Die folgenden Screenshots zeigen Koda in der lokalen Entwicklungsumgebung.
+
+**Login-Seite** – Authentifizierung mit E-Mail und Passwort:
+![Login-Seite](./screenshots/login.png)
+
+**Dashboard** – Projektübersicht nach dem Login:
+![Dashboard](./screenshots/dashboard.png)
+
+**Projektansicht** – Öffentliche API-Dokumentation:
+![Projektansicht](./screenshots/project.png)
+
+
+**Begründung des Tech-Stacks:**
+
+**Angular 21** wurde gewählt, weil es mit dem eingebauten `DomSanitizer` und `HttpClient`-Interceptoren security-relevante Features out-of-the-box mitbringt. Die strikte Typisierung durch TypeScript reduziert Fehlerklassen wie Injection-Angriffe durch Typenverwirrung bereits zur Compile-Zeit.
+
+**Spring Boot 4 / Spring Security** bietet ein ausgereiftes, gut dokumentiertes Sicherheits-Framework mit nativem JWT-Filter-Support, BCrypt-Integration und deklarativer Autorisierung (`@PreAuthorize`). Die Alternative Node.js hätte mehr manuelle Sicherheitskonfiguration erfordert.
+
+**PostgreSQL 17** wurde wegen der ACID-Konformität gewählt: Transaktionen stellen sicher, dass die Token-Rotation (altes Token löschen, neues speichern) atomar abläuft und kein Fenster für Replay-Angriffe entsteht.
+
+**JWT (HMAC-SHA256)** ermöglicht stateless Authentication ohne serverseitige Session-Verwaltung. Im Gegensatz zu einfachen Session-Cookies ist der Token selbst signiert und kann von jedem Service verifiziert werden, ohne die Datenbank zu befragen.
+
+**Flyway** stellt sicher, dass Datenbankschema-Änderungen versioniert, reproduzierbar und auditierbar sind – relevant für A03, da Schema-Migrationen Teil der Integritätskette sind.
+
 ## 2. Gewählte OWASP-Kategorien
 
 | # | Kategorie                               | Pflicht |
@@ -388,3 +414,32 @@ public record RegisterRequest(
 | Audit Log (alle Auth-Events)           | A07         | `AuditLogService.java`                   |
 | Input-Validierung mit Bean Validation  | A07         | DTOs mit `@Valid`-Constraints            |
 | SQL Injection-Schutz                   | A01, A03    | JPA/Hibernate (parametrisierte Queries)  |
+
+
+## 8. Teamarbeit & Organisation
+
+### Aufgabenverteilung
+
+| Mitglied | Bereich |
+|---|---|
+| Mitja Kurath | Backend, Frontend, Security, Deployment, Dokumentation |
+| Daniel | Datenbankschema (Flyway-Migrationen), Code-Reviews via PRs |
+| Alex Shahini | Projektplanung, Anforderungsanalyse, Testing, Dokumentation |
+
+### Git-Workflow
+
+Wir haben mit Feature Branches und Pull Requests gearbeitet.
+Änderungen wurden per PR in `main` gemergt und gegenseitig reviewed.
+
+
+## 9. Quellen
+
+- OWASP Top 10 2025: https://owasp.org/Top10/
+- A01 Broken Access Control: https://owasp.org/Top10/A01_2021-Broken_Access_Control/
+- A02 Cryptographic Failures: https://owasp.org/Top10/A02_2021-Cryptographic_Failures/
+- A03 Software and Data Integrity: https://owasp.org/Top10/A03_2021-Injection/
+- A07 Authentication Failures: https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/
+- BCrypt Password Hashing: https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
+- JWT Best Practices: https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html
+- Spring Security Reference: https://docs.spring.io/spring-security/reference/
+- JJWT Dokumentation: https://github.com/jwtk/jjwt
