@@ -1,8 +1,6 @@
 .git
-.gitignore
-.gradle
-build
-*.md
-compose.yml
-.env*
-src/test
+web/
+api/.gradle
+api/build
+api/compose.yml
+api/src/test
